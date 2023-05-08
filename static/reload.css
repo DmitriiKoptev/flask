@@ -1,0 +1,9 @@
+.table{
+    display: block;
+    padding: 20px 0 20px 0;
+}
+
+.table-container__buttons {
+    display: flex;
+    gap: 10px;
+  }
