@@ -184,5 +184,5 @@ def dict_to_db():
 def opener():  
     return render_template('queue.html', select="", subject='', date='', group='', student="")  
            
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+  app.run(port=5000)
