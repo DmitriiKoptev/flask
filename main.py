@@ -17,6 +17,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
+if __name__ == '__main__':
+  app.run(port=5000)
+
+
 
 class Students(db.Model):
     id = db.Column(db.Integer, primary_key=True)
