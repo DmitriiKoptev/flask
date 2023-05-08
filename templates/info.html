@@ -1,0 +1,137 @@
+<head>
+    <!DOCTYPE html>
+    <html lang="ru">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+
+    <!-- <script type="text/javascript" src="../libraries/table-to-excel/dist/tableToExcel.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="../static/"></script>
+</head>
+<body>
+        <header class="header info_header">
+            <div class="wrapper header-content">
+                <!-- <a class="header__logo">На главную</a> -->
+                <nav class="header__navigation">
+                    <ul class="navigation">
+                        <li class="navigation__link"><a href="index.html">Объявления</a></li>
+                        <li class="navigation__link"><a href="queue.html">Очередь</a></li>
+                        <li class="navigation__link"><a href="materials.html">Материалы</a></li>
+                        <li class="navigation__link navigation__link_active"><a href="#" disabled>Информация</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        
+        <div class="wrapper layout-2-column">
+            <div class="map-container">
+                <section>
+                    <h2 class="info__h2">Места для печати и ксерокопии</h2>
+                    <p>Печать и ксерокопия может осуществляться в бибилотеке во всех корпусах.</p>
+                    <ul>
+                        <li>
+                            <h3>ул. Б. Морская, 67 (ауд. 12-16)</h3>
+                                Понедельник - четверг: 9:00 - 18:00<br>Пятница: 9:00 - 17:00
+                        </li>
+                        <li>
+                            <h3>ул. Гастелло, 15 (ауд. С-26)</h3>
+                                Понедельник - четверг: 9:30 - 18:00<br>Пятница: 9:30 - 17:00	
+                        </li>
+                        <li>
+                            <h3>ул. Ленсовета, 14 (ауд. 31-05)</h3>Понедельник - пятница: 9:30 - 17:00
+                        </li>
+                    </ul>
+                    <p>Если библиотека не работает в нужный день, то воспользуйтесь услугами мест, обозначенных на картах:</p>
+                    
+                    <figure>
+                        <h3>ул. Б. Морская</h3>
+                        <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A44420c726417521698bb7bd3413112d0ebfb5569352ee3126d287d282df33c3c&amp;width=500&amp;height=500&amp;lang=ru_RU&amp;scroll=true"></script>
+                    </figure>
+
+                    <figure>
+                        <h3>ул. Гастелло и ул. Ленсовета</h3>
+                        <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ab3353927e332c606e1e53384a9c1504ba1c5bd6b329b2d531d4cbbe4b2265250&amp;width=500&amp;height=500&amp;lang=ru_RU&amp;scroll=true"></script>
+                    </figure>
+                </section>   
+    
+                <section>
+                    <!-- <h2>Где покушать</h2> -->
+                    <!-- <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Af98df6be20b0d3cf4185b8aa5c58d3f0f390aad25d72ff2e6298465e777bf904&amp;width=500&amp;height=500&amp;lang=ru_RU&amp;scroll=true"></script> -->
+                </section>
+            </div>
+
+            <main>
+                <article class="article block info_article">
+                    <h1>Данный раздел посвящён справочной информации на различные темы</h1>
+                </article>
+
+                <section>
+                    <h2 class="info__h2">Институты и кафедры</h2>
+                    <ul>
+                        <li>
+                            <h3 class="info__h3 block">Институт информационных технологий и программирования</h3>
+                            <ul class="info__list">
+                                <li>Кафедра прикладной информатики (Кафедра 41)</li>
+                                <li>Кафедра информационных систем и технологий (Кафедра 42)</li>
+                                <li>Кафедра компьютерных технологий и программной инженерии (Кафедра 43)</li>
+                                <li>Кафедра вычислительных систем и сетей (Кафедра 44)</li>
+                            </ul>                            
+                        </li>
+                        <li>
+                            <h3 class="info__h3 block">Институт аэрокосмических приборов и систем</h3>
+                            <ul class="info__list">
+                                <li>Кафедра аэрокосмических измерительно-вычислительных комплексов (Кафедра 11)</li>
+                                <li>Кафедра системного анализа и логистики (Кафедра 12)</li>
+                                <li>Кафедра эксплуатации и управления аэрокосмическими системами (Кафедра 13)</li>
+                                <li>Кафедра аэрокосмических компьютерных и программных систем (Кафедра 14)</li>
+                            </ul>    
+                        </li>
+                        <li>
+                            <h3 class="info__h3 block">Институт радиотехники и инфокоммуникационных технологий</h3>
+                            <ul class="info__list">
+                                <li>Кафедра радиотехнических и оптоэлектронных комплексов (Кафедра 21)</li>
+                                <li>Кафедра радиотехнических систем (Кафедра 22)</li>
+                                <li>Кафедра конструирования и технологий электронных и лазерных средств (Кафедра 23)</li>
+                                <li>Кафедра биотехнических систем и технологий (Кафедра 24)</li>
+                                <li>Кафедра инфокоммуникационных технологий и систем связи (Кафедра 25)</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h3 class="info__h3 block">Институт киберфизических систем</h3>
+                            <ul class="info__list">
+                                <li>Кафедра управления в технических системах (Кафедра 31)</li>
+                                <li>Кафедра электромеханики и робототехники (Кафедра 32)</li>
+                                <li>Кафедра информационной безопасности (Кафедра 33)</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h3 class="info__h3 block">Институт фундаментальной подготовки и технологических инноваций</h3>
+                            <ul class="info__list">
+                                <li>Кафедра высшей математики и механики (Кафедра 1)</li>
+                                <li>Кафедра прикладной математики (Кафедра 2)</li>
+                                <li>Кафедра физики (Кафедра 3)</li>
+                                <li> Кафедра инноватики и интегрированных систем качества (Кафедра 5)</li>
+                                <li>Кафедра метрологического обеспечения инновационных технологий и промышленной безопасности (Кафедра 6)</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h3 class="info__h3 block">Институт технологий предпринимательства и права</h3>
+                            <ul class="info__list">
+                                <li>Кафедра экономики высокотехнологичных производств (Кафедра 81)</li>
+                                <li>Кафедра бизнес-информатики и менеджмента (Кафедра 82)</li>
+                                <li>Кафедра международного предпринимательства (Кафедра 83)</li>
+                                <li>Кафедра публичного права (Кафедра 84)</li>
+                                <li>Кафедра гражданского права (Кафедра 85)</li>
+                            </ul>   
+                        </li>
+                    </ul>
+                </section>
+            </main>
+    <script src="scripts/table-opener.js"></script>
+    <script src="scripts/queue.js"></script>
+    <script src="scripts/select-dependence.js"></script>
+</body>

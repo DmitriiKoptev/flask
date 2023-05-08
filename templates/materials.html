@@ -1,0 +1,126 @@
+<head>
+    <!DOCTYPE html>
+    <html lang="ru">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+
+    <!-- <script type="text/javascript" src="../libraries/table-to-excel/dist/tableToExcel.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="../static/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+        <header class="header materials_header">
+            <div class="wrapper header-content">
+                <!-- <a class="header__logo">На главную</a> -->
+                <nav class="header__navigation">
+                    <ul class="navigation">
+                        <li class="navigation__link"><a href="index.html">Объявления</a></li>
+                        <li class="navigation__link"><a href="queue.html">Очередь</a></li>
+                        <li class="navigation__link navigation__link_active"><a href="#" disabled>Материалы</a></li>
+                        <li class="navigation__link"><a href="info.html">Информация</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+<!-- Форма выбора таблицы -->
+        <div class="section">
+            <div class="wrapper form-layout">
+                
+
+                    <div class="form block">
+                            <form class="form-content" action="" method="POST">
+                                <div class="sel-container">
+                                    <label for="" class="required" >Семестр :</label>
+                                    <select id="semester" class="select1 select" name="semester" required>
+                                        <option value="0">-- требуется выбор --</option>
+                                        <!-- <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option> -->
+                                    </select>
+                                </div>
+        <!-- выбор когда занятие -->
+                                <div class="sel-container">
+                                    <label for="" class="required" >Дисциплина :</label>
+                                    <select id="subject" class="select2 select" name="subject" required>
+                                        <option value="0">-- выберите предыдущее поле --</option>
+                                        <!-- <option value="tp">Технологии программирования</option>
+                                        <option value="tsisa">Теория систем и системный анализ</option>
+                                        <option value="taifya">Теория автоматов и формальных языков</option>
+                                        <option value="kg">Компьютерная графика</option>
+                                        <option value="ma">Математический анализ</option>
+                                        <option value="laiag">Линейная алгебра и аналитическая геометрия</option>
+                                        <option value="op">Основы программирования</option>
+                                        <option value="f">Физика</option>
+                                        <option value="dm">Дискретная математика</option>
+                                        <option value="isit">Информационные системы и технологии</option> -->
+                                    </select>
+                                </div>
+        <!-- выбор предмета -->
+                                <div class="sel-container">
+                                    <label for="" class="required" >Преподаватель:</label>
+                                    <select id="teacher" class="select3 select" name="teacher" required>
+                                        <option value="0">-- выберите предыдущие поля --</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+
+                    <div class="article block">
+                        <h1>Данный раздел посвящён титульникам и полезным материалам</h1>
+                    </div>
+
+                </div>
+        </div>
+
+<!-- контейнер файлов (он закрывается и открывается) -->
+        <main id="file-holder" class="file-container">
+            <div class="wrapper file-container-box block">
+<!-- 1 семестр -->
+<!-- технологии программирования -->
+                <div id="tp-1-taa" class="file-content"></div>
+                <div id="tp-1-kln" class="file-content"></div>
+                <div id="tp-1-rop" class="file-content"></div>
+<!-- Теория систем и системный анализ  -->   
+                
+<!-- Теория автоматов и формальных языков --> 
+                
+
+<!-- таблица 4117 -->
+
+<!-- таблица 4118 -->
+
+<!-- кнопки экспотра -->
+            </div>
+        </main>
+
+        
+        <!-- <input type="file" id="file_upload" />
+        <button onclick="upload()">Upload</button>  
+        <table id="display_excel_data"></table> -->
+
+
+        <!-- <div class="filler"></div> -->
+
+
+        <!-- <footer class="footer">
+            <div class="wrapper">
+                <a href="#">вк</a>
+                <a href="#">telegram</a>
+                <a href="#">email</a>
+            </div>
+        </footer> -->
+
+    <script src="../static/m_table-opener.js"></script>
+    <script src="../static/m_queue.js"></script>
+    <script src="../static/m_select-dependence.js"></script>
+</body>

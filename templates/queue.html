@@ -1,0 +1,250 @@
+<head>
+    <!DOCTYPE html>
+    <html lang="ru">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+
+    {% if select != "" %}
+        <link rel="stylesheet" type="text/css" href="../static/reload.css">
+    {% endif %}
+    
+    {% macro input(plus, minus, select, idplus, idminus, group, priority) -%}
+        <td>
+            {% if select!="" %}
+                <div class="td__column">
+                    {{ select }}
+                    <div class="td__block">
+                        <div class="admin">({{ priority }})</div>
+                        <fieldset class="admin td__radio"  id="{{group}}">
+                            <input class="radio" type="radio" id="{{idplus}}"
+                            name="{{group}}" value="{{plus}}{{select}}">
+                            <label class="radio-label" for="{{idplus}}">+</label>
+
+                            <input class="radio" type="radio" id="{{idminus}}"
+                            name="{{group}}" value="{{minus}}{{select}}">
+                            <label class="radio-label" for="{{idminus}}">-</label>
+                        </fieldset>
+                    </div>
+                </div>
+            {% else %}
+                {{ select }}
+            {% endif %}
+        </td>
+    {%- endmacro %}
+
+    <script src="../static/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
+    <script src="../static/table-to-excel/dist/tableToExcel.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+        <header class="header">
+            <div class="wrapper header-content">
+                <!-- <a class="header__logo">На главную</a> -->
+                <nav class="header__navigation">
+                    <ul class="navigation">
+                        <li class="navigation__link"><a href="index.html">Объявления</a></li>
+                        <li class="navigation__link navigation__link_active"><a href="#" disabled>Очередь</a></li>
+                        <li class="navigation__link"><a href="materials.html">Материалы</a></li>
+                        <li class="navigation__link"><a href="info.html">Информация</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+<!-- Форма выбора таблицы -->
+        <div class="section">
+            <div class="wrapper form-layout">
+                
+
+                    <div class="form block">
+                        <form id = "mainForm" class="form-content" method="POST" action="{{ url_for('values') }}">
+                            
+                            <div class="sel-container">
+                                <label for="" class="required" >Учебная группа :</label>
+                                <select id="group" class="select1 select" name="group" required>
+                                    <option value="0" selected>-- требуется выбор --</option>
+                                    <option value="4116">4116</option>
+                                    <option value="4117">4117</option>
+                                    <option value="4118">4118</option>
+                                    <option value="4125">4125</option>
+                                    <option value="4126">4126</option>
+                                    <option value="4127">4127</option>
+                                    <option value="4275">4275</option>
+                                    <option value="4276">4276</option>
+                                    <option value="4277">4277</option>
+                                </select>
+                            </div>
+    <!-- выбор типа сортировки -->
+                            <div class="sel-container">
+                                <label for="" class="required" >Тип сортировки :</label>
+                                <select id="type" class="select2 select" name="type" required disabled>
+                                    <option value="0" selected>-- требуется выбор --</option>
+                                    <option value="up">по возрастанию</option>
+                                    <option value="down">по убыванию</option>
+                                </select>
+                            </div>
+    <!-- выбор предмета -->
+                            <div class="sel-container">
+                                <label for="" class="required" >Предмет :</label>
+                                <select id="subject" class="select3 select" name="subject" onchange="this.form.submit()" required disabled>
+                                    <option id="change" selected>-- выберите предыдущие поля --</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="article block">
+                        <h1>Данный раздел посвящён электронной очереди на сдачу учебных работ.</h1>
+                    </div>
+
+                </div>
+        </div>
+
+        
+<!-- контейнер таблиц (он закрывается и открывается) -->
+        <main id="table-holder" class="table-container">
+            <div class="wrapper">
+                <div id="main-table" class="table block">
+                    {% if select != "" %}
+                    <div>
+                        <h2 id="table__name"><span>Группа = {{group}}</span><span>Предмет = {{subject}}</span><span>Тип = {{type}}</span></h2>
+                    </div>
+                    {% endif %}
+                    <table id="export_this" class="block main-div-table">
+                        <thead>
+                            <tr>
+                                <th>Высокая вероятность сдачи</th>
+                                <th>Средняя вероятность сдачи</th>
+                                <th>Низкая вероятность сдачи</th>
+                            </tr>
+                        </thead>
+                        <tbody id = "mainList">
+                            <form method=post id="checkbox_form" action="{{ url_for('change') }}">
+                                <tr>
+                                    {{ input(plus, minus, select[0], "r1+", "r1-", "group1", student[0]) }}
+                                    {{ input(plus, minus, select[10], "r2+", "r2-", "group2", student[10]) }}
+                                    {{ input(plus, minus, select[20], "r3+", "r3-", "group3", student[20]) }}
+                                </tr>
+                                <tr>
+                                    {{ input(plus, minus, select[1], "r4+", "r4-", "group4", student[1]) }}
+                                    {{ input(plus, minus, select[11], "r5+", "r5-", "group5", student[11]) }}
+                                    {{ input(plus, minus, select[21], "r6+", "r6-", "group6", student[21]) }}
+                                </tr>
+                                <tr>
+                                    {{ input(plus, minus, select[2], "r7+", "r7-", "group7", student[2]) }}
+                                    {{ input(plus, minus, select[12], "r8+", "r8-", "group8", student[12]) }}
+                                    {{ input(plus, minus, select[22], "r9+", "r9-", "group9", student[22]) }}
+                                </tr>
+                                <tr>
+                                    {{ input(plus, minus, select[3], "r10+", "r10-", "group10", student[3]) }}
+                                    {{ input(plus, minus, select[13], "r11+", "r11-", "group11", student[13]) }}
+                                    {{ input(plus, minus, select[23], "r12+", "r12-", "group12", student[23]) }}
+                                </tr>
+                                <tr>
+                                    {{ input(plus, minus, select[4], "r13+", "r13-", "group13", student[4]) }}
+                                    {{ input(plus, minus, select[14], "r14+", "r14-", "group14", student[14]) }}
+                                    {{ input(plus, minus, select[24], "r15+", "r15-", "group15", student[24]) }}
+                                </tr>
+                                <tr>
+                                    {{ input(plus, minus, select[5], "r16+", "r16-", "group16", student[5]) }}
+                                    {{ input(plus, minus, select[15], "r17+", "r17-", "group17", student[15]) }}
+                                    {{ input(plus, minus, select[25], "r18+", "r18-", "group18", student[25]) }}
+                                </tr>
+                                <tr>
+                                    {{ input(plus, minus, select[6], "r19+", "r19-", "group19", student[6]) }}
+                                    {{ input(plus, minus, select[16], "r20+", "r20-", "group20", student[16]) }}
+                                    {{ input(plus, minus, select[26], "r21+", "r21-", "group21", student[26]) }}
+                                </tr>
+                                <tr>
+                                    {{ input(plus, minus, select[7], "r22+", "r22-", "group22", student[7]) }}
+                                    {{ input(plus, minus, select[17], "r23+", "r23-", "group23", student[17]) }}
+                                    {{ input(plus, minus, select[27], "r24+", "r24-", "group24", student[27]) }}
+                                </tr>
+                                <tr>
+                                    {{ input(plus, minus, select[8], "r25+", "r25-", "group25", student[8]) }}
+                                    {{ input(plus, minus, select[18], "r26+", "r26-", "group26", student[18]) }}
+                                    {{ input(plus, minus, select[28], "r27+", "r27-", "group27", student[28]) }}
+                                </tr>
+                                <tr>
+                                    {{ input(plus, minus, select[9], "r28+", "r28-", "group28", student[9]) }}
+                                    {{ input(plus, minus, select[19], "r29+", "r29-", "group29", student[19]) }}
+                                    {{ input(plus, minus, select[29], "r30+", "r30-", "group30", student[29]) }}
+                                </tr>
+                            </form>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- <div id="tsisa-4116-1" class="table table_toggle"></div>
+                <div id="taifya-4116-1" class="table table_toggle"></div> -->
+   
+                <!-- <div id="tp-4116-2" class="table table_toggle"></div>
+                <div id="tsisa-4116-2" class="table table_toggle"></div>
+                <div id="taifya-4116-2" class="table table_toggle"></div>
+   
+                <div id="tp-4116-3" class="table table_toggle"></div>
+                <div id="tsisa-4116-3" class="table table_toggle"></div>
+                <div id="taifya-4116-3" class="table table_toggle"></div> -->
+
+<!-- таблица 4117 -->
+
+<!-- таблица 4118 -->
+
+<!-- кнопки экспотра -->
+                <div id="main-buttons" class="table-container__buttons">
+                    <div class="layout-gap-20">
+                        <button class=" user button table_button" onclick="exportReportToExcel(this)">Экспорт в excel</button>
+                        <button id="pdf" class="user button table_button" onclick="downloadPDFWithBrowserPrint()">Экспорт в pdf</button>
+                    </div>
+                    <form class="submit_file layout-gap-20" method=post enctype=multipart/form-data action="{{ url_for('remove_priority') }}">
+                        <input class="none" name="group" value="{{group}}" />
+                        <input class="none" name="subject" value="{{subject}}" />
+                        <input class="admin button table_button" type=submit value="!!!Cбросить приоритет!!!">
+                    </form>
+                    <input class="admin button table_button" type="submit" form="checkbox_form" value="Применить"/>
+                    <button class="admin button table_button" onclick="cancel()">Отменить</button>
+                    <form class="submit_file layout-gap-20" method=post enctype=multipart/form-data action="{{ url_for('upload') }}">
+                        <input class="admin button table_button" type=file name=file>
+                        <input class="admin button table_button" type=submit value=Загрузить>
+                    </form>
+                    <button id="admin" class="button table_button" onclick="admin()">Включить режим администратора</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- <div>
+            <form method=post enctype=multipart/form-data>
+                <input type=file name=file>
+                <input type=submit value=Upload>
+            </form>
+        </div> -->
+
+
+        <!-- <input type="file" id="file_upload" />
+        <button onclick="upload()">Upload</button>  
+        <table id="display_excel_data"></table> -->
+
+
+        <!-- <div class="filler"></div> -->
+
+
+        <!-- <footer class="footer">
+            <div class="wrapper">
+                <a href="#">вк</a>
+                <a href="#">telegram</a>
+                <a href="#">email</a>
+            </div>
+        </footer> -->
+    
+    <script defer src="../static/q_excel_to_html_table.js"></script>
+    <script src="../static/q_export.js"></script>
+    <script src="../static/q_table-opener.js"></script>
+    <script src="../static/q_queue.js"></script>
+    <script src="../static/q_select-dependence.js"></script>
+    <script src="../static/keep_value.js"></script>
+    <script src="../static/q_admin.js"></script>
+</body>
